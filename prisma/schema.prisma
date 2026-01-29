@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum BlockType {
+  header
+  question
+  button
+  footer
+}
+
+enum QuestionType {
+  single
+  multi
+  text
+}
+
+model Quiz {
+  id          String      @id @default(uuid())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  title       String
+  publishedAt DateTime?
+
+  blocks QuizBlock[]
+}
+
+model QuizBlock {
+  id           String        @id @default(uuid())
+  quizId       String
+  quiz         Quiz          @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  type         BlockType
+  order        Int?
+  title        String?
+  text         String?
+  questionType QuestionType?
+  options      Json?
+}
