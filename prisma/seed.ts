@@ -13,39 +13,53 @@ async function main() {
 
   await prisma.quiz.create({
     data: {
-      title: 'Quiz',
+      title: 'General Knowledge Quiz',
       publishedAt: new Date(),
       blocks: {
         create: [
           {
             type: 'header',
-            order: 0,
-            title: 'Welcome!',
-          },
-          {
-            type: 'question',
             order: 1,
-            title: 'What is the capital of France?',
-            questionType: 'single',
-            options: ['London', 'Paris', 'Berlin', 'Madrid'],
+            title: 'Welcome to the Quiz!',
           },
           {
             type: 'question',
             order: 2,
-            title: 'Which planets are known as gas giants?',
-            questionType: 'multi',
-            options: ['Mars', 'Jupiter', 'Saturn', 'Venus'],
+            title: 'What is the capital of France?',
+            questionType: 'single',
+            options: [
+              { id: '1', label: 'Paris', isCorrectAnswer: true },
+              { id: '2', label: 'London', isCorrectAnswer: false },
+              { id: '3', label: 'Berlin', isCorrectAnswer: false },
+              { id: '4', label: 'Madrid', isCorrectAnswer: false },
+            ],
           },
           {
             type: 'question',
             order: 3,
+            title: 'Which planets are known as gas giants?',
+            questionType: 'multi',
+            options: [
+              { id: '1', label: 'Mars', isCorrectAnswer: false },
+              { id: '2', label: 'Jupiter', isCorrectAnswer: true },
+              { id: '3', label: 'Saturn', isCorrectAnswer: true },
+              { id: '4', label: 'Venus', isCorrectAnswer: false },
+            ],
+          },
+          {
+            type: 'question',
+            order: 4,
             title: 'What is 7 x 8?',
             questionType: 'text',
+            options: [
+              { id: '1', label: 'Option 1', isCorrectAnswer: false },
+              { id: '2', label: 'Option 2', isCorrectAnswer: false },
+            ],
           },
           {
             type: 'footer',
-            order: 4,
-            text: 'Thanks for taking the quiz!',
+            order: 999,
+            title: 'Thanks for taking the quiz!',
           },
         ],
       },
@@ -61,26 +75,35 @@ async function main() {
         create: [
           {
             type: 'header',
-            order: 0,
+            order: 1,
             title: 'Programming Fundamentals',
           },
           {
             type: 'question',
-            order: 1,
+            order: 2,
             title: 'Which of these is a JavaScript framework?',
             questionType: 'single',
-            options: ['Django', 'React', 'Laravel', 'Rails'],
+            options: [
+              { id: '1', label: 'React', isCorrectAnswer: true },
+              { id: '2', label: 'Django', isCorrectAnswer: false },
+              { id: '3', label: 'Laravel', isCorrectAnswer: false },
+            ],
           },
           {
             type: 'question',
-            order: 2,
+            order: 3,
             title: 'What does HTML stand for?',
             questionType: 'text',
+            options: [
+              { id: '1', label: 'Option 1', isCorrectAnswer: false },
+              { id: '2', label: 'Option 2', isCorrectAnswer: false },
+              { id: '3', label: 'Option 3', isCorrectAnswer: false },
+            ],
           },
           {
-            type: 'button',
-            order: 3,
-            title: 'Submit Quiz',
+            type: 'footer',
+            order: 999,
+            title: 'Quiz Footer!',
           },
         ],
       },
